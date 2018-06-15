@@ -1,0 +1,83 @@
+{
+  // Controls if quick suggestions should show up while typing
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": false
+  },
+  // Controls if suggestions should be accepted on 'Enter' - in addition to 'Tab'. Helps to avoid ambiguity between inserting new lines or accepting suggestions. The value 'smart' means only accept a suggestion with Enter when it makes a textual change
+  "editor.acceptSuggestionOnEnter": "on",
+  // Controls the delay in ms after which quick suggestions will show up.
+  "editor.quickSuggestionsDelay": 10,
+  // Controls if suggestions should automatically show up when typing trigger characters
+  "editor.suggestOnTriggerCharacters": true,
+  // Enable word based suggestions
+  "editor.wordBasedSuggestions": true,
+  // Enable parameter hints
+  "editor.parameterHints": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "files.associations": {
+    "string": "cpp",
+    "*.ipp": "cpp",
+    "*.js": "javascriptreact",
+    "__locale": "cpp",
+    "locale": "cpp",
+    "typeinfo": "cpp",
+    "*.tcc": "cpp",
+    "unordered_map": "cpp",
+    "__bit_reference": "cpp",
+    "__string": "cpp",
+    "__tree": "cpp",
+    "map": "cpp",
+    "set": "cpp",
+    "string_view": "cpp",
+    "array": "cpp",
+    "deque": "cpp",
+    "vector": "cpp",
+    "initializer_list": "cpp",
+    "__split_buffer": "cpp",
+    "iterator": "cpp",
+    "cctype": "cpp",
+    "clocale": "cpp",
+    "cmath": "cpp",
+    "cstddef": "cpp",
+    "cstdint": "cpp",
+    "cstdio": "cpp",
+    "cstdlib": "cpp",
+    "cstring": "cpp",
+    "ctime": "cpp",
+    "cwchar": "cpp",
+    "cwctype": "cpp",
+    "exception": "cpp",
+    "fstream": "cpp",
+    "functional": "cpp",
+    "iomanip": "cpp",
+    "iosfwd": "cpp",
+    "istream": "cpp",
+    "limits": "cpp",
+    "memory": "cpp",
+    "new": "cpp",
+    "ostream": "cpp",
+    "numeric": "cpp",
+    "sstream": "cpp",
+    "stdexcept": "cpp",
+    "streambuf": "cpp",
+    "system_error": "cpp",
+    "type_traits": "cpp",
+    "tuple": "cpp",
+    "utility": "cpp",
+    "algorithm": "cpp",
+    "__config": "cpp",
+    "__nullptr": "cpp"
+  },
+  "clang-format.executable": "${env.CLANG_EXECUTABLE}",
+  "prettier.eslintIntegration": true,
+  "eslint.packageManager": "yarn",
+  "[python]": {
+    "editor.rulers": [120]
+  },
+  "[javascriptreact]": {
+    "editor.rulers": [120]
+  }
+}

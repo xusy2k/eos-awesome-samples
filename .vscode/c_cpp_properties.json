@@ -1,0 +1,22 @@
+{
+  "configurations": [
+    {
+      "name": "Linux",
+      "browse": {
+        "path": ["${workspaceFolder}"],
+        "limitSymbolsToIncludedHeaders": true
+      },
+      "includePath": [
+        "${workspaceFolder}/contracts/**",
+        "${env.BOOST_INCLUDEDIR}"
+      ],
+      "defines": [],
+      "compilerPath": "/usr/bin/clang++-4.0",
+      "cStandard": "c11",
+      "cppStandard": "c++14",
+      "intelliSenseMode": "clang-x64",
+      "clang_format_path": "${env.CLANG_EXECUTABLE}"
+    }
+  ],
+  "version": 4
+}

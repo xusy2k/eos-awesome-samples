@@ -1,0 +1,53 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["prettier", "prettier/standard", "prettier/react"],
+  "plugins": ["babel", "prefer-object-spread", "prettier"],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx"]
+      }
+    }
+  },
+  "rules": {
+    "key-spacing": 0,
+    "jsx-quotes": [2, "prefer-double"],
+    "max-len": [
+      2,
+      {
+        "code": 120,
+        "ignoreComments": true,
+        "ignoreUrls": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true
+      }
+    ],
+    "object-curly-spacing": [2, "always"],
+    "no-undef": 2,
+    "no-unused-vars": 1,
+    "no-console": 0,
+    "no-debugger": 0,
+    "no-mixed-operators": 0,
+    "no-confusing-arrow": 0,
+    "prefer-object-spread/prefer-object-spread": 2,
+    "react/prefer-stateless-function": 0,
+    "react/jsx-filename-extension": 0,
+    "react/sort-comp": 0,
+    "react/require-extension": 0,
+    "import/no-extraneous-dependencies": 0,
+    "no-use-before-define": 0,
+    "prettier/prettier": "error"
+  },
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "sourceType": "module"
+  }
+}
