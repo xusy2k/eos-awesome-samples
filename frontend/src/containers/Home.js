@@ -26,10 +26,10 @@ export default class Home extends Component {
         <div className="Home">
           <ul>
             <li>
-              <a href="/ping">Ping</a>
+              <a href="/dapps/ping/">Ping</a>
             </li>
             <li>
-              <a href="/todo">ToDo</a>
+              <a href="/dapps/todo/">ToDo</a>
             </li>
           </ul>
         </div>
