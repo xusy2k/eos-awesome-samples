@@ -2,12 +2,12 @@
 
 ## Install
 
-- Part of the challenge in working with EOS is setting up the local blockchain to work against. Luckily, EOS offers some facilities for [setting up your local EOS environment](https://github.com/EOSIO/eos/wiki/Local-Environment#getting-the-code). For this guide, we’ll be using `EOSIO v1.0.0`.
+- Part of the challenge in working with EOS is setting up the local blockchain to work against. Luckily, EOS offers some facilities for [setting up your local EOS environment](https://github.com/EOSIO/eos/wiki/Local-Environment#getting-the-code). For this guide, we’ll be using `EOSIO v1.0.6`.
   A summary of that guide can be condensed into a few key commands:
 
 ```bash
 $ git clone https://github.com/EOSIO/eos --recursive
-$ git checkout v1.0.0
+$ git checkout v1.0.6
 $ cd eos
 $ ./eosio_build.sh
 $ cd build && make
@@ -77,12 +77,12 @@ There is a shell script for set accounts:
 ```bash
 Usage: init-chain.sh -o <EOS_PUBLIC_KEY>
 
- -o <EOS_PUBLIC_KEY>: Public key's Owner
- -q <EOS_ACTIVE_PUBLIC_KEY>: Public key's Active
+ -o <EOS_PUBLIC_KEY>: Public key`s Owner
+ -q <EOS_ACTIVE_PUBLIC_KEY>: Public key`s Active
 
 Optional
- -p <EOS_PRIVATE_KEY>: Private key's Owner
- -r <EOS_ACTIVE_PRIVATE_KEY>: Private key's Active User
+ -p <EOS_PRIVATE_KEY>: Private key`s Owner
+ -r <EOS_ACTIVE_PRIVATE_KEY>: Private key`s Active User
  -u <CLEOS_NODEOS_URL>: Nodeos -u parameter. Default: http://localhost:8888/
  -w <CLEOS_WALLET_URL>: Nodeos --wallet-url parameter. Default: http://localhost:8900/
  -n <WALLET_NAME>: Optional. Associate all to a named wallet. Default: default
