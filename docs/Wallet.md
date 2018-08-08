@@ -1,6 +1,12 @@
+# Start daemon
+
+```bash
+$ keosd
+```
+
 # Setup Wallet
 
-- We'll use a named wallet instead of default wallet:
+- We'll use a named wallet, **-n eos-awesome** instead of default wallet. In case you prefer use default wallet you can omit **-n parameter**:
 
 ```bash
 $ cleos create wallet -n eos-awesome
@@ -59,8 +65,3 @@ $ cleos get accounts EOS5H6SSZdi9iNKrNozRDjPCkiCUFvk2xBjDN85heeipTTFe8aG6L
   ]
 }
 ```
-
-# Accounts && Contracts
-
-- [ping](../contracts/ping/README.md)
-- [todo](../contracts/todo/README.md)

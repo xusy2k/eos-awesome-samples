@@ -15,6 +15,21 @@ $ sudo make install
 $ nodeos
 ```
 
+## Update
+
+Once repo is cloned, for update is need to pull repo and its submodules:
+
+```bash
+$ cd eos
+$ git pull
+$ git checkout v1.0.10
+$ git submodule update --init --recursive
+$ ./eosio_build.sh
+$ cd build && make
+$ sudo make install
+$ nodeos
+```
+
 ## Create a Owner/Active Key
 
 ```bash
@@ -91,14 +106,20 @@ Optional
  -h: Print this help
 ```
 
-For exemple, if we want to create a named wallet `eos-awesome`:
+For exemple, if we want to create a named wallet `eos-awesome` and log all results to `${HOME}/eos.log`:
 
 ```bash
-contracts $ ./init-chain.sh -o EOS5Md6BVWDZ4bhGnhdyXZnHMFcBQghQ9LT7Kk6Du2igwxhHWADjA -p 5J6nV3FiUNeie41pQSJWPdcyza4FihdiwE6HJ7JcR9DMVMEHMZt \
-  -q EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV -r 5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3 -n eos-awesome
+contracts $ ./init-chain.sh \
+  -o EOS5Md6BVWDZ4bhGnhdyXZnHMFcBQghQ9LT7Kk6Du2igwxhHWADjA \
+  -p 5J6nV3FiUNeie41pQSJWPdcyza4FihdiwE6HJ7JcR9DMVMEHMZt \
+  -q EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV \
+  -r 5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3 \
+  -n eos-awesome | tee ${HOME}/eos.log
 ```
+
+But if you want to use `default` wallet, you can omit -n parameter
 
 In case to begin again, don't forget to remove
 
 - Blockchain data directory: ${HOME}/.local/share/eosio/nodeos/data/
-- Wallets created: ${HOME}/eosio-wallet/\*.wallet
+- Wallets created: ${HOME}/eosio-wallet/eos-awesome.wallet

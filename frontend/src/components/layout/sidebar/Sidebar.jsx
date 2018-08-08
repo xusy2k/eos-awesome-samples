@@ -54,6 +54,11 @@ export default class Sidebar extends Component {
                     <i className="icon icon-energy" /> ToDo
                   </NavLink>
                 </li>
+                <li className="nav-item">
+                  <NavLink to="/dapps/pet/" className="nav-link" activeClassName="active">
+                    <i className="icon icon-energy" /> Pet
+                  </NavLink>
+                </li>
               </ul>
             </li>
 

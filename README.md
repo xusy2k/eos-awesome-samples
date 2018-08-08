@@ -14,9 +14,10 @@ This repo is a collection of useful contracts && frontend for blockchain [EOS](h
 
 ## Samples
 
-- Forked from https://github.com/eosasia/awesome-eos-tutorials
+- Picked from https://github.com/eosasia/awesome-eos-tutorials
   - [Ping](docs/Ping/README.md)
   - [ToDo](docs/ToDo/README.md)
+- [WIP] https://github.com/leordev/monstereos
 
 # Getting started
 
@@ -24,7 +25,7 @@ For compile and deploy contracts you must see instructions inside [Ping](docs/Pi
 
 ```
 cd frontend
-cp -a env.template .env.local
+cp -a env.template .env.development
 yarn install
 yarn start
 ```
