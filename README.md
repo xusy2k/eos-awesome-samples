@@ -21,7 +21,12 @@ This repo is a collection of useful contracts && frontend for blockchain [EOS](h
 
 # Getting started
 
-For compile and deploy contracts you must see instructions inside [Ping](docs/Ping/README.md) and [ToDo](docs/ToDo/README.md). Then:
+For compile and deploy contracts you must see execute [Init Chain command](docs/EOS.md) or deploy each applications following the instructions:
+
+- [Ping](docs/Ping/README.md)
+- [ToDo](docs/ToDo/README.md)
+
+Finally:
 
 ```
 cd frontend
