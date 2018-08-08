@@ -17,7 +17,7 @@ $ nodeos
 
 ## Update
 
-Once repo is cloned, for update is need to pull repo and its submodules:
+Once repo is cloned, for update is need to pull repo and its submodules, for example, how to upgrade to brach `v1.0.10`:
 
 ```bash
 $ cd eos
@@ -90,7 +90,7 @@ plugin = eosio::history_plugin
 There is a shell script for set accounts:
 
 ```bash
-Usage: init-chain.sh -o <EOS_PUBLIC_KEY>
+Usage: init-chain.sh
 
  -o <EOS_PUBLIC_KEY>: Public key`s Owner
  -q <EOS_ACTIVE_PUBLIC_KEY>: Public key`s Active
