@@ -11,7 +11,7 @@ print_cmd(){
 
 usage() {
     echo "" 1>&2;
-    echo "Usage: `basename $0` -o <EOS_PUBLIC_KEY>" 1>&2;
+    echo "Usage: `basename $0`" 1>&2;
     echo "" 1>&2;
     echo " -o <EOS_PUBLIC_KEY>: Public key's Owner" 1>&2;
     echo " -q <EOS_ACTIVE_PUBLIC_KEY>: Public key's Active" 1>&2;

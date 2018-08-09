@@ -117,6 +117,21 @@ contracts $ ./init-chain.sh \
   -n eos-awesome | tee ${HOME}/eos.log
 ```
 
+### Trick
+
+Password wallet is inside `${HOME}/eos.log`, so for looking for or just unlock it:
+
+```bash
+$ grep WALLET_PASSWORD ${HOME}/eos.log
+WALLET_PASSWORD: "PW5JkuSZBeyZM8uSeNe3de3D8h6bupu3qELhDSxemaNrVN4D5zzbj"
+$ cleos wallet unlock -n eos-awesome --password PW5JkuSZBeyZM8uSeNe3de3D8h6bupu3qELhDSxemaNrVN4D5zzbj
+# In 1 line:
+$ cleos wallet unlock -n eos-awesome --password `grep WALLET_PASSWORD ${HOME}/eos.log | awk {'print $2'}| cut -f2 -d'"'`
+```
+
+grep WALLET_PASSWORD eos.log
+WALLET_PASSWORD: "PW5JkuSZBeyZM8uSeNe3de3D8h6bupu3qELhDSxemaNrVN4D5zzbj"
+
 But if you want to use `default` wallet, you can omit -n parameter
 
 In case to begin again, don't forget to remove
