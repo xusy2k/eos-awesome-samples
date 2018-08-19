@@ -31,6 +31,9 @@ export default class Home extends Component {
             <li>
               <a href="/dapps/todo/">ToDo</a>
             </li>
+            <li>
+              <a href="/dapps/notechain/">Note Chain</a>
+            </li>
           </ul>
         </div>
       );

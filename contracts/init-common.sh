@@ -23,13 +23,14 @@ usage() {
     echo " -w <CLEOS_WALLET_URL>: Nodeos --wallet-url parameter. Default: http://localhost:8900/" 1>&2;
     echo " -n <WALLET_NAME>: Optional. Associate all to a named wallet WALLET_NAME" 1>&2;
     echo " -b <EOSIO_SOURCE>: EOSIO_SOURCE dir path. Default: ${HOME}/eos" 1>&2;
+    echo " -s <EOS_SYMBOL>: Symbol. Default: SYS" 1>&2;
     echo " -v: Only verbose (No executing nothing)" 1>&2;
     echo " -h: Print this help" 1>&2;
     echo "" 1>&2;
     exit 1;
 }
 
-while getopts ":vh: o:p:q:r:u:w:n:b:" option; do
+while getopts ":vh: o:p:q:r:u:w:n:b:s:" option; do
     case "${option}" in
         o)
             EOS_PUBLIC_KEY=${OPTARG}
@@ -55,6 +56,9 @@ while getopts ":vh: o:p:q:r:u:w:n:b:" option; do
         r)
             EOS_ACTIVE_PRIVATE_KEY=${OPTARG}
             ;;
+        s)
+            EOS_SYMBOL=${OPTARG}
+            ;;
         v)
             VERBOSE=true
             ;;
@@ -67,6 +71,14 @@ while getopts ":vh: o:p:q:r:u:w:n:b:" option; do
     esac
 done
 shift $((OPTIND-1))
+
+if [ -z "${EOSIO_SOURCE}" ]; then
+    EOSIO_SOURCE="${HOME}/eos";
+fi;
+
+if [ -z "${EOS_SYMBOL}" ]; then
+    EOS_SYMBOL="SYS";
+fi;
 
 if [ -z "$CLEOS_NODEOS_URL" ]; then
     CLEOS_NODEOS_URL="http://localhost:8888/";
@@ -86,6 +98,7 @@ echo "CLEOS_NODEOS_URL=${CLEOS_NODEOS_URL}";
 echo "CLEOS_WALLET_URL=${CLEOS_WALLET_URL}";
 echo "WALLET_NAME=${WALLET_NAME}";
 echo "EOSIO_SOURCE=${EOSIO_SOURCE}";
+echo "EOS_SYMBOL=${EOS_SYMBOL}";
 echo "VERBOSE=${VERBOSE}";
 echo "CLEOS=${CLEOS}";
 echo "**********************************************************************"
@@ -145,9 +158,9 @@ if [ ! -z ${EOS_PRIVATE_KEY} ]; then
     print_cmd "$exec_cmd";
     KEYS_LIST=$(eval $exec_cmd);
     echo "${KEYS_LIST}";
-    exists_key=$(echo ${KEYS_LIST} |grep -i \"${EOS_PUBLIC_KEY}\")
+    exists_key=$(echo ${KEYS_LIST} | grep -i \"${EOS_PUBLIC_KEY}\")
     if [ -z "$exists_key" ]; then
-        exec_cmd="${CLEOS} wallet import -n ${WALLET_NAME} ${EOS_PRIVATE_KEY}";
+        exec_cmd="${CLEOS} wallet import -n ${WALLET_NAME} --private-key ${EOS_PRIVATE_KEY}";
         print_cmd "$exec_cmd";
         if [ $ONLY_DEBUG -eq 0 ]; then
             result=$(eval $exec_cmd);
@@ -163,9 +176,9 @@ if [ ! -z ${EOS_ACTIVE_PRIVATE_KEY} ]; then
     print_cmd "$exec_cmd";
     KEYS_LIST=$(eval $exec_cmd);
     echo "${KEYS_LIST}";
-    exists_key=$(echo ${KEYS_LIST} |grep -i \"${EOS_ACTIVE_PUBLIC_KEY}\")
+    exists_key=$(echo ${KEYS_LIST} | grep -i \"${EOS_ACTIVE_PUBLIC_KEY}\")
     if [ -z "$exists_key" ]; then
-        exec_cmd="${CLEOS} wallet import -n ${WALLET_NAME} ${EOS_ACTIVE_PRIVATE_KEY}";
+        exec_cmd="${CLEOS} wallet import -n ${WALLET_NAME} --private-key ${EOS_ACTIVE_PRIVATE_KEY}";
         print_cmd "$exec_cmd";
         if [ $ONLY_DEBUG -eq 0 ]; then
             result=$(eval $exec_cmd);
@@ -177,7 +190,7 @@ if [ ! -z ${EOS_ACTIVE_PRIVATE_KEY} ]; then
 fi;
 
 
-for account in eosio.bpay eosio.msig eosio.names eosio.ram eosio.ramfee eosio.saving eosio.stake eosio.vpay eosio.token awe.tester; do
+for account in eosio.bpay eosio.msig eosio.names eosio.ram eosio.ramfee eosio.saving eosio.stake eosio.vpay eosio.token; do
     exists_account=$(echo ${ACCOUNT_LIST} |grep -i \"${account}\")
     if [ -z "$exists_account" ]; then
         echo "";
@@ -193,7 +206,7 @@ for account in eosio.bpay eosio.msig eosio.names eosio.ram eosio.ramfee eosio.sa
         fi;
 
         echo "";
-        exec_cmd="${CLEOS} wallet import -n ${WALLET_NAME} ${PRIVATE_KEY} # Private key's ${account}";
+        exec_cmd="${CLEOS} wallet import -n ${WALLET_NAME} --private-key ${PRIVATE_KEY} # Private key's ${account}";
         print_cmd "$exec_cmd";
         if [ $ONLY_DEBUG -eq 0 ]; then
             result=$(eval $exec_cmd);
@@ -213,8 +226,15 @@ for account in eosio.bpay eosio.msig eosio.names eosio.ram eosio.ramfee eosio.sa
 done;
 
 echo "";
-print_cmd "cd ${EOSIO_SOURCE}/build;";
-cd ${EOSIO_SOURCE}/build;
+if [ -d "${EOSIO_SOURCE}/build" ]; then
+    exec_cmd="cd ${EOSIO_SOURCE}/build";
+    cd ${EOSIO_SOURCE}/build;
+elif [ -d "${EOSIO_SOURCE}/contracts" ]; then
+    exec_cmd="cd ${EOSIO_SOURCE}";
+    cd ${EOSIO_SOURCE};
+fi;
+print_cmd "$exec_cmd";
+
 
 echo "Booting Chain Contracts"
 echo "";
@@ -244,12 +264,7 @@ if [ $ONLY_DEBUG -eq 0 ]; then
         result=$(eval $exec_cmd);
         sleep .5;
 
-        exec_cmd="${CLEOS} push action eosio.token create '[ \"eosio\", \"1000000000.0000 SYS\", 0, 0, 0]' -p eosio.token";
-        print_cmd "$exec_cmd";
-        result=$(eval $exec_cmd);
-        sleep .5;
-
-        exec_cmd="${CLEOS} push action eosio.token create '[ \"eosio\", \"1000000000.0000 EOS\", 0, 0, 0]' -p eosio.token";
+        exec_cmd="${CLEOS} push action eosio.token create '[ \"eosio\", \"1000000000.0000 ${EOS_SYMBOL}\", 0, 0, 0]' -p eosio.token";
         print_cmd "$exec_cmd";
         result=$(eval $exec_cmd);
         sleep .5;

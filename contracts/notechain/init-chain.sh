@@ -6,10 +6,10 @@ THIS_PWD=$(dirname $ABSPATH)
 . ../init-common.sh "${@}"
 
 ###############################################################
-# PING
+# notechain
 ###############################################################
 
-for account in ping.ctr; do
+for account in notechainacc; do
     exists_account=$(echo ${ACCOUNT_LIST} |grep -i \"${account}\")
     if [ -z "$exists_account" ]; then
         echo "";
@@ -44,21 +44,20 @@ for account in ping.ctr; do
     fi;
 done;
 
-# contract deployment
 
+# contract deployment
 cd ${THIS_PWD}
 
 echo "";
-echo "Deploying Ping Contract..."
-
+echo "Deploying notechain Contract..."
 echo "";
-exec_cmd="${CLEOS} get code ping.ctr";
+exec_cmd="${CLEOS} get code notechainacc";
 print_cmd "$exec_cmd";
 if [ $ONLY_DEBUG -eq 0 ]; then
     result=$(eval $exec_cmd);
     result2=$(echo $result | grep -v "00000000000000000000000000000000000000000000");
     if [ -z "$result" ] || [ -z "$result2" ]; then
-        exec_cmd="eosiocpp -o ping.wast ping.cpp";
+        exec_cmd="eosiocpp -o notechain.wast notechain.cpp";
         print_cmd "$exec_cmd";
         if [ $ONLY_DEBUG -eq 0 ]; then
             result=$(eval $exec_cmd);
@@ -67,7 +66,7 @@ if [ $ONLY_DEBUG -eq 0 ]; then
         fi;
 
         echo "";
-        exec_cmd="eosiocpp -g ping.abi ping.cpp";
+        exec_cmd="eosiocpp -g notechain.abi notechain.cpp";
         print_cmd "$exec_cmd";
         if [ $ONLY_DEBUG -eq 0 ]; then
             result=$(eval $exec_cmd);
@@ -75,21 +74,10 @@ if [ $ONLY_DEBUG -eq 0 ]; then
         fi;
 
         echo "";
-        exec_cmd="${CLEOS} set contract ping.ctr ../ping -p ping.ctr";
+        exec_cmd="${CLEOS} set contract notechainacc ../notechain -p notechainacc";
         print_cmd "$exec_cmd";
         result=$(eval $exec_cmd);
         echo "${result}";
         sleep .5;
     fi;
 fi;
-
-# Test contract
-echo "";
-exec_cmd="${CLEOS} push action ping.ctr ping '[\"eosawesome\"]' -p eosawesome";
-print_cmd "$exec_cmd";
-if [ $ONLY_DEBUG -eq 0 ]; then
-    result=$(eval $exec_cmd);
-    echo "${result}";
-    sleep .5;
-fi;
-

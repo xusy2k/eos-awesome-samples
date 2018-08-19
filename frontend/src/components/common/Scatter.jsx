@@ -10,7 +10,6 @@ const network = {
 
 export default class Scatter extends Component {
   constructor(props) {
-    debugger;
     super(props);
     this.state = {
       scatter: null,
@@ -41,7 +40,6 @@ export default class Scatter extends Component {
   };
 
   scatterExtension = e => {
-    debugger;
     clearTimeout(this.state.scatterDetection);
     // Scatter will now be available from the window scope.
     // At this stage the connection to Scatter from the application is
@@ -71,7 +69,6 @@ export default class Scatter extends Component {
   };
 
   render() {
-    debugger;
     return null;
   }
 }

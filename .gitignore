@@ -8,9 +8,18 @@ node_modules
 
 # production
 /build
+frontend/build
 
 # auto generated files (sass, less, ...)
 src/**/*.css
+
+# compile contract files
+**/*.abi
+**/*.wasm
+**/*.wast
+
+# blockchain data
+**/eosio_docker/data/**
 
 # misc
 .DS_Store

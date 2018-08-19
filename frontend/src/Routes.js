@@ -13,6 +13,8 @@ import NodeosInfo from "./components/nodeos/info";
 import PingDemo from "./components/dapps/ping";
 import TodoList from "./components/dapps/todo";
 import PetView from "./components/dapps/pet";
+import NoteChainView from "./components/dapps/notechain";
+
 import References from "./components/references";
 
 export default ({ childProps }) => (
@@ -23,6 +25,7 @@ export default ({ childProps }) => (
     <AppliedRoute path="/dapps/ping/" exact component={PingDemo} props={childProps} />
     <AppliedRoute path="/dapps/todo/" exact component={TodoList} props={childProps} />
     <AppliedRoute path="/dapps/pet/" exact component={PetView} props={childProps} />
+    <AppliedRoute path="/dapps/notechain/" exact component={NoteChainView} props={childProps} />
     <AppliedRoute path="/references/" exact component={References} props={childProps} />
 
     {/*

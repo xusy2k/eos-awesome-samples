@@ -5,6 +5,7 @@ THIS_PWD=$(dirname $ABSPATH)
 
 . ../init-common.sh "${@}"
 
+EOS_SYMBOL="EOS"
 
 ###############################################################
 # MonterEOS
@@ -14,14 +15,14 @@ THIS_PWD=$(dirname $ABSPATH)
 # karma account
 echo "";
 echo "Creating MonsterEOS Account"
-exec_cmd="${CLEOS} create account eosio monstereosio ${EOS_PUBLIC_KEY} ${EOS_PUBLIC_KEY}";
+exec_cmd="${CLEOS} create account eosio monstereosio ${EOS_PUBLIC_KEY} ${EOS_ACTIVE_PUBLIC_KEY}";
 print_cmd "$exec_cmd";
 if [ $ONLY_DEBUG -eq 0 ]; then
     result=$(eval $exec_cmd);
     sleep .5;
 fi;
 
-exec_cmd="${CLEOS} push action eosio.token issue '[ \"monstereosio\", \"1000.0000 EOS\", \"initial\" ]' -p eosio";
+exec_cmd="${CLEOS} push action eosio.token issue '[ \"monstereosio\", \"1000.0000 ${EOS_SYMBOL}\", \"initial\" ]' -p eosio";
 print_cmd "$exec_cmd";
 if [ $ONLY_DEBUG -eq 0 ]; then
     result=$(eval $exec_cmd);
@@ -46,11 +47,33 @@ if [ $ONLY_DEBUG -eq 0 ]; then
         echo $result;
         sleep .5;
 
-        # echo "";
-        # exec_cmd="eosiocpp -g pet.abi pet.cpp ## Consider uncommenting EOSIO_ABI_EX";
-        # print_cmd "$exec_cmd";
-        # result=$(eval $exec_cmd);
-        # sleep .5;
+        echo "";
+        exec_cmd="eosiocpp -g pet.abi pet.cpp";
+        print_cmd "$exec_cmd";
+        result=$(eval $exec_cmd);
+        sleep .5;
+
+        # if [ ! -f pet.abi ]; then
+        #    if [ -f /eos/contracts/eosiolib/core_symbol.hpp ]; then
+        #        echo "";
+        #    else
+        #        if [ -f /opt/eosio/contracts/eosiolib/core_symbol.hpp ]; then
+        #            exec_cmd="ln -s /opt/eosio/contracts/eosiolib/core_symbol.hpp /eos/contracts/eosiolib/";
+        #            echo "$exec_cmd";
+        #            if [ $ONLY_DEBUG -eq 0 ]; then
+        #               result=$(eval $exec_cmd);
+        #                sleep .5;
+        #            fi;
+        #        else
+        #            echo "Ni idea";
+        #        fi;
+        #    fi
+        #    echo "";
+        #    exec_cmd="eosiocpp -g pet.abi pet.cpp";
+        #    print_cmd "$exec_cmd";
+        #    result=$(eval $exec_cmd);
+        #    sleep .5;
+        #fi;
 
         echo "";
         exec_cmd="${CLEOS} set contract monstereosio ../pet";
@@ -63,10 +86,10 @@ fi;
 
 
 # tests users accounts
-echo "Creating a few EOS Accounts"
+echo "Creating a few ${EOS_SYMBOL} Accounts"
 for account in leordev tbfleming velua friedger xus; do
     echo "";
-    exec_cmd="${CLEOS} create account eosio ${account} ${EOS_PUBLIC_KEY} ${EOS_PUBLIC_KEY}";
+    exec_cmd="${CLEOS} create account eosio ${account} ${EOS_PUBLIC_KEY} ${EOS_ACTIVE_PUBLIC_KEY}";
     print_cmd "$exec_cmd";
     if [ $ONLY_DEBUG -eq 0 ]; then
         result=$(eval $exec_cmd);
@@ -75,7 +98,7 @@ for account in leordev tbfleming velua friedger xus; do
     fi;
 
     echo "";
-    exec_cmd="${CLEOS} push action eosio.token issue '[ \"${account}\", \"10.0000 EOS\", \"initial\" ]' -p eosio";
+    exec_cmd="${CLEOS} push action eosio.token issue '[ \"${account}\", \"10.0000 ${EOS_SYMBOL}\", \"initial\" ]' -p eosio";
     print_cmd "$exec_cmd";
     if [ $ONLY_DEBUG -eq 0 ]; then
         result=$(eval $exec_cmd);
@@ -87,7 +110,7 @@ done;
 # depositting in monstereosio account
 echo "";
 echo "pinging wallet"
-exec_cmd="${CLEOS} push action eosio.token transfer '[\"leordev\", \"monstereosio\", \"1.0000 EOS\", \"deposit\"]' -p leordev";
+exec_cmd="${CLEOS} push action eosio.token transfer '[\"leordev\", \"monstereosio\", \"1.0000 ${EOS_SYMBOL}\", \"deposit\"]' -p leordev";
 print_cmd "$exec_cmd";
 if [ $ONLY_DEBUG -eq 0 ]; then
     result=$(eval $exec_cmd);
@@ -164,7 +187,7 @@ fi;
 # monsters stats
 echo ""
 echo "getting leordev balance"
-exec_cmd="${CLEOS} get currency balance monstereosio leordev EOS":
+exec_cmd="${CLEOS} get currency balance monstereosio leordev ${EOS_SYMBOL}":
 print_cmd "$exec_cmd";
 if [ $ONLY_DEBUG -eq 0 ]; then
     result=$(eval $exec_cmd);

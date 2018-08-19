@@ -42,35 +42,35 @@ warning: transaction executed locally, but may not be confirmed by the network y
 Create ToDos:
 
 ```bash
-$ cleos push action todo.user create '["awe.tester", 1, "hello world"]' -p awe.tester
+$ cleos push action todo.user create '["eosawesome", 1, "hello world"]' -p eosawesome
 executed transaction: 8d8f065ff83d8eacf159f8bcf8b678bd8ee6d84b871eb3d53cb6c37207d0b4df  120 bytes  870 us
-#     todo.user <= todo.user::create            {"author":"awe.tester","id":1,"description":"hello world"}
+#     todo.user <= todo.user::create            {"author":"eosawesome","id":1,"description":"hello world"}
 >> todo#1 created
 warning: transaction executed locally, but may not be confirmed by the network yet
-$ cleos push action todo.user create '["awe.tester", 1, "hello world"]' -p awe.tester
+$ cleos push action todo.user create '["eosawesome", 1, "hello world"]' -p eosawesome
 Error 3050003: eosio_assert_message assertion failure
 Error Details:
 assertion failure with message: record with that ID already exists
-$ cleos push action todo.user read '[1]' -p awe.tester
+$ cleos push action todo.user read '[1]' -p eosawesome
 executed transaction: 11ab1da33d06f64a520d7d4b9a9bba9f5a3d88ed43f1907cf2f804d9e4728005  104 bytes  407 us
 #     todo.user <= todo.user::read              {"id":1}
 >> todo#1 read description: hello world
-$ cleos push action todo.user update '[1, "Bye bye world"]' -p awe.tester
+$ cleos push action todo.user update '[1, "Bye bye world"]' -p eosawesome
 executed transaction: 6263ca52842a108e8c86d81efb7892c58afa9c67019e52e9627654b7316ff305  120 bytes  579 us
 #     todo.user <= todo.user::update            {"id":1,"description":"Bye bye world"}
 >> todo#1 updated
 warning: transaction executed locally, but may not be confirmed by the network yet
-$ cleos push action todo.user read '[1]' -p awe.tester
+$ cleos push action todo.user read '[1]' -p eosawesome
 executed transaction: b35411eb4914276c382dfa131b9a274607bf4cfa323da851c6b8629c5f26bbfd  104 bytes  404 us
 #     todo.user <= todo.user::read              {"id":1}
 >> todo#1 read description: Bye bye world
 warning: transaction executed locally, but may not be confirmed by the network yet
-$ cleos push action todo.user destroy '["awe.tester", 1]' -p awe.tester
+$ cleos push action todo.user destroy '["eosawesome", 1]' -p eosawesome
 executed transaction: bed2aed68f98e887524ee37ba1388eb716cecd8f4d0a839dffdc90e73a53563c  104 bytes  483 us
-#     todo.user <= todo.user::destroy           {"author":"awe.tester","id":1}
+#     todo.user <= todo.user::destroy           {"author":"eosawesome","id":1}
 >> todo#1 destroyed
 warning: transaction executed locally, but may not be confirmed by the network yet
-$ cleos push action todo.user destroy '["awe.tester", 1]' -p awe.tester
+$ cleos push action todo.user destroy '["eosawesome", 1]' -p eosawesome
 Error 3050003: eosio_assert_message assertion failure
 Error Details:
 assertion failure with message: record with that ID does not exist
@@ -90,7 +90,7 @@ $ cleos get table todo.user todo todos
   "more": false
 }
 
-$ cleos get table awe.tester todo todos
+$ cleos get table eosawesome todo todos
 {
   "rows": [],
   "more": false

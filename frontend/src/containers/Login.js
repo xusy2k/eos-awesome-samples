@@ -116,22 +116,20 @@ class LoginView extends React.Component {
       this.state.scatter
         .getIdentity()
         .then(identity => {
-          debugger;
+          // debugger;
         })
         .catch(error => {
-          debugger;
+          // debugger;
         });
     } else {
-      alert("Oh, no tienes Scatter instalado!");
+      // alert("Do you have Scatter installed?");
     }
   };
 
   logout = e => {
-    debugger;
     this.state.scatter.forgetIdentity().then(() => {
-      debugger;
+      // debugger;
     });
-    debugger;
   };
 
   render() {

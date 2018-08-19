@@ -80,7 +80,7 @@ Now that we have all the materials necessary for our smart contract, let’s get
 
 For this, we’ll need to create a new key-pair, let's do that by running: `cleos create key`. This will generate a random public and private key for you. Throughout the rest of the tutorial, be sure to replace any indications of [public_key]/[private_key] with the values you've just received.
 
-Import the private key to your current unlocked account wallet: `cleos wallet import [private_key]`
+Import the private key to your current unlocked account wallet: `cleos wallet import --private-key [private_key]`
 Set up an account for the contract with the public key: `cleos create account eosio ping.ctr [owner_key: public_key] [active_key: public_key]`
 
 - Link the contract with your newly created account `cleos set contract ping.ctr ../ping -p ping.ctr`

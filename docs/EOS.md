@@ -1,6 +1,10 @@
 # EOS
 
-## Install
+## TL;DR
+
+Use shell script [eosio_docker/scripts/init_blockchain.sh](../eosio_docker/scripts/init_blockchain.sh)
+
+## Install ![deprecated](https://img.shields.io/badge/status-deprecated-red.svg)
 
 - Part of the challenge in working with EOS is setting up the local blockchain to work against. Luckily, EOS offers some facilities for [setting up your local EOS environment](https://github.com/EOSIO/eos/wiki/Local-Environment#getting-the-code). For this guide, we’ll be using `EOSIO v1.0.6`.
   A summary of that guide can be condensed into a few key commands:
@@ -9,7 +13,7 @@
 $ git clone https://github.com/EOSIO/eos --recursive
 $ git checkout v1.0.6
 $ cd eos
-$ ./eosio_build.sh
+$ ./eosio_build.sh -s EOS
 $ cd build && make
 $ sudo make install
 $ nodeos
@@ -24,7 +28,23 @@ $ cd eos
 $ git pull
 $ git checkout v1.0.10
 $ git submodule update --init --recursive
-$ ./eosio_build.sh
+$ ./eosio_build.sh -s EOS
+$ cd build && make
+$ sudo make install
+$ nodeos
+```
+
+# WasmSDK
+
+WasmSDK is a toolchain for WebAssembly (WASM) with EOSIO specific optimizations
+
+## Install
+
+```bash
+$ https://github.com/eosio/eosio.wasmsdk
+$ git checkout v1.1.1
+$ cd eosio.wasmsdk
+$ ./build.sh EOS
 $ cd build && make
 $ sudo make install
 $ nodeos
@@ -114,7 +134,7 @@ contracts $ ./init-chain.sh \
   -p 5J6nV3FiUNeie41pQSJWPdcyza4FihdiwE6HJ7JcR9DMVMEHMZt \
   -q EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV \
   -r 5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3 \
-  -n eos-awesome | tee ${HOME}/eos.log
+  -n eos-awesome 2>&1 | tee ${HOME}/eos.log
 ```
 
 ### Trick

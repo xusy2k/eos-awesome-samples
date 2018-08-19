@@ -25,7 +25,7 @@ for account in todo.user; do
         fi;
 
         echo "";
-        exec_cmd="${CLEOS} wallet import -n ${WALLET_NAME} ${PRIVATE_KEY} # Private key's ${account}";
+        exec_cmd="${CLEOS} wallet import -n ${WALLET_NAME} --private-key ${PRIVATE_KEY} # Private key's ${account}";
         print_cmd "$exec_cmd";
         if [ $ONLY_DEBUG -eq 0 ]; then
             result=$(eval $exec_cmd);
@@ -33,7 +33,7 @@ for account in todo.user; do
         fi;
 
         echo "";
-        exec_cmd="${CLEOS} create account eosio ${account} ${EOS_PUBLIC_KEY} ${EOS_PUBLIC_KEY}";
+        exec_cmd="${CLEOS} create account eosio ${account} ${EOS_PUBLIC_KEY} ${EOS_ACTIVE_PUBLIC_KEY}";
         print_cmd "$exec_cmd";
         if [ $ONLY_DEBUG -eq 0 ]; then
             result=$(eval $exec_cmd);
@@ -84,17 +84,17 @@ fi;
 
 # Test contract
 echo "";
-exec_cmd="${CLEOS} push action todo.user create '[\"awe.tester\", 1, \"hello world\"]' -p awe.tester";
+exec_cmd="${CLEOS} push action todo.user create '[\"eosawesome\", 1, \"hello world\"]' -p eosawesome";
 print_cmd "$exec_cmd";
 if [ $ONLY_DEBUG -eq 0 ]; then
-    # >> todo#1 created {"author":"awe.tester","id":1,"description":"hello world"}
+    # >> todo#1 created {"author":"eosawesome","id":1,"description":"hello world"}
     result=$(eval $exec_cmd);
     echo "${result}";
     sleep .5;
 fi;
 
 echo "";
-exec_cmd="${CLEOS} push action todo.user create '[\"awe.tester\", 1, \"hello world\"]' -p awe.tester";
+exec_cmd="${CLEOS} push action todo.user create '[\"eosawesome\", 1, \"hello world\"]' -p eosawesome";
 print_cmd "$exec_cmd";
 if [ $ONLY_DEBUG -eq 0 ]; then
     # Note: It must crash: Error 3050003: eosio_assert_message assertion failure (assertion failure with message: record with that ID already exists)
@@ -104,7 +104,7 @@ if [ $ONLY_DEBUG -eq 0 ]; then
 fi;
 
 echo "";
-exec_cmd="${CLEOS} push action todo.user read '[1]' -p awe.tester";
+exec_cmd="${CLEOS} push action todo.user read '[1]' -p eosawesome";
 print_cmd "$exec_cmd";
 if [ $ONLY_DEBUG -eq 0 ]; then
     # >> todo#1 read description: hello world
@@ -114,7 +114,7 @@ if [ $ONLY_DEBUG -eq 0 ]; then
 fi;
 
 echo "";
-exec_cmd="${CLEOS} push action todo.user update '[1, \"Bye bye world\"]' -p awe.tester";
+exec_cmd="${CLEOS} push action todo.user update '[1, \"Bye bye world\"]' -p eosawesome";
 print_cmd "$exec_cmd";
 if [ $ONLY_DEBUG -eq 0 ]; then
     # >> todo#1 updated {"id":1,"description":"Bye bye world"}
@@ -124,7 +124,7 @@ if [ $ONLY_DEBUG -eq 0 ]; then
 fi;
 
 echo "";
-exec_cmd="${CLEOS} push action todo.user read '[1]' -p awe.tester";
+exec_cmd="${CLEOS} push action todo.user read '[1]' -p eosawesome";
 print_cmd "$exec_cmd";
 if [ $ONLY_DEBUG -eq 0 ]; then
     # >> todo#1 read description: Bye bye world
@@ -134,10 +134,10 @@ if [ $ONLY_DEBUG -eq 0 ]; then
 fi;
 
 echo "";
-exec_cmd="${CLEOS} push action todo.user destroy '[\"awe.tester\", 1]' -p awe.tester";
+exec_cmd="${CLEOS} push action todo.user destroy '[\"eosawesome\", 1]' -p eosawesome";
 print_cmd "$exec_cmd";
 if [ $ONLY_DEBUG -eq 0 ]; then
-    #>> todo.user <= todo.user::destroy {"author":"awe.tester","id":1}
+    #>> todo.user <= todo.user::destroy {"author":"eosawesome","id":1}
     result=$(eval $exec_cmd);
     echo "${result}";
     sleep .5;
@@ -147,7 +147,7 @@ echo "";
 exec_cmd="${CLEOS} get table todo.user todo todos";
 print_cmd "$exec_cmd";
 if [ $ONLY_DEBUG -eq 0 ]; then
-    #>> todo.user <= todo.user::destroy {"author":"awe.tester","id":1}
+    #>> todo.user <= todo.user::destroy {"author":"eosawesome","id":1}
     result=$(eval $exec_cmd);
     echo "${result}";
     sleep .5;

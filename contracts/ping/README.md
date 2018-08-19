@@ -38,9 +38,9 @@ warning: transaction executed locally, but may not be confirmed by the network y
 - Test contract
 
 ```bash
-$ cleos push action ping.ctr ping '["awe.tester"]' -p awe.tester
+$ cleos push action ping.ctr ping '["eosawesome"]' -p eosawesome
 executed transaction: d1c927c6aa4e9315bbb0063fb1da8186abe6b50b8138af3c3be6039205a1c3cf  104 bytes  974 us
-#      ping.ctr <= ping.ctr::ping               {"receiver":"awe.tester"}
+#      ping.ctr <= ping.ctr::ping               {"receiver":"eosawesome"}
 >> Received ping
 warning: transaction executed locally, but may not be confirmed by the network yet
 ```

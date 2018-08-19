@@ -37,19 +37,19 @@ Public key: EOS78mvwFbFGBBMAc86RfpakWzsMCcvriyy4J1rwthasAREPx6NQp
 Importing theese keys into wallet:
 
 ```bash
-$ cleos wallet import -n eos-awesome 5JtCxGU8Vq4Vtd5R4hWmtFmgy1G3VSEAQ5nTgsrsMHHLksQTcJQ
+$ cleos wallet import -n eos-awesome --private-key 5JtCxGU8Vq4Vtd5R4hWmtFmgy1G3VSEAQ5nTgsrsMHHLksQTcJQ
 imported private key for: EOS5H6SSZdi9iNKrNozRDjPCkiCUFvk2xBjDN85heeipTTFe8aG6L
 
-$ cleos wallet import -n eos-awesome 5JSMAoRPWJnRY7g9wAUUMtoxQvwNSgjHMAmxcHA6TKzfCdgJ4Z7
+$ cleos wallet import -n eos-awesome --private-key 5JSMAoRPWJnRY7g9wAUUMtoxQvwNSgjHMAmxcHA6TKzfCdgJ4Z7
 imported private key for: EOS78mvwFbFGBBMAc86RfpakWzsMCcvriyy4J1rwthasAREPx6NQp
 ```
 
 Create a new account, for testing:
 
 ```bash
-$ cleos create account eosio awe.tester EOS5H6SSZdi9iNKrNozRDjPCkiCUFvk2xBjDN85heeipTTFe8aG6L EOS78mvwFbFGBBMAc86RfpakWzsMCcvriyy4J1rwthasAREPx6NQp
+$ cleos create account eosio eosawesome EOS5H6SSZdi9iNKrNozRDjPCkiCUFvk2xBjDN85heeipTTFe8aG6L EOS78mvwFbFGBBMAc86RfpakWzsMCcvriyy4J1rwthasAREPx6NQp
 executed transaction: 851d63613dca0ee271e2f5c5ae258f1599c7dc0c53691f01693be5d54c0ae582  200 bytes  448 us
-#         eosio <= eosio::newaccount            {"creator":"eosio","name":"awe.tester","owner":{"threshold":1,"keys":[{"key":"EOS5H6SSZdi9iNKrNozRDj...
+#         eosio <= eosio::newaccount            {"creator":"eosio","name":"eosawesome","owner":{"threshold":1,"keys":[{"key":"EOS5H6SSZdi9iNKrNozRDj...
 warning: transaction executed locally, but may not be confirmed by the network yet
 ```
 
@@ -59,7 +59,7 @@ Listing accounts:
 $ cleos get accounts EOS5H6SSZdi9iNKrNozRDjPCkiCUFvk2xBjDN85heeipTTFe8aG6L
 {
   "account_names": [
-    "awe.tester",
+    "eosawesome",
     "ping.ctr",
     "todo.user"
   ]
