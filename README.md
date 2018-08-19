@@ -15,12 +15,13 @@ Make sure Docker and Node.js are installed
 ./quick_start.sh
 ```
 
-Once installed you can execute:
+The above command will execute the following in sequence:
 
-```bash
-./start_eosio_docker.sh  # It starts docker container
-./start_frontend.sh.sh   # It starts frontend
-```
+1. `first_time_setup.sh`
+2. `start_eosio_docker.sh`
+3. `start_frontend.sh`
+
+**To stop**, press `ctrl+c` on your keyboard, and execute:
 
 ## Manual installation
 
